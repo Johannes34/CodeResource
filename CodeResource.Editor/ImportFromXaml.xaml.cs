@@ -18,6 +18,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml;
 using System.Xml.Linq;
 
 namespace CodeResource.Editor
@@ -129,7 +130,8 @@ namespace CodeResource.Editor
             // TODO: button to browse for file or folder
             // TODO: allow folder path to process all xamls within the folder structure
             // TODO: also allow selecting .cs files
-            var xaml = XElement.Load(XamlFilePath);
+
+            var xaml = XElement.Load(XamlFilePath, LoadOptions.PreserveWhitespace);
             var fileName = System.IO.Path.GetFileName(XamlFilePath);
 
             // TODO: remember last input in UI elements?
@@ -183,6 +185,14 @@ namespace CodeResource.Editor
                         if (String.IsNullOrEmpty(resourceName))
                             continue;
 
+                        // common UI string format patterns: ignore for resource entry, rather add it in UI binding via stringformat:
+                        bool endsWithColon = false;
+                        if (modifiedResourceValue.EndsWith(':'))
+                        {
+                            endsWithColon = true;
+                            modifiedResourceValue = modifiedResourceValue.Substring(0, modifiedResourceValue.Length - 1);
+                        }
+
                         // if resource name already exists, it should not be created but rather reused
                         var entry = Manager.Resources.FirstOrDefault(r => r.ResourceName == resourceName);
                         if (entry == null)
@@ -222,6 +232,8 @@ namespace CodeResource.Editor
                         if (InsertBindings)
                         {
                             var binding = $"{{Binding Source={{x:Static res:{Manager.ClassName}.Instance}}, Path={resourceName}}}";
+                            if (endsWithColon)
+                                binding = $"{{Binding Source={{x:Static res:{Manager.ClassName}.Instance}}, Path={resourceName}, StringFormat={{}}{{0}}:}}";
                             attribute.Value = binding;
                         }
 
@@ -237,14 +249,16 @@ namespace CodeResource.Editor
             {
                 // move original file to the recycle bin to avoid unwanted data loss:
                 FileSystem.DeleteFile(XamlFilePath, UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin);
-                
-                // save updated xaml file:
-                xaml.Save(XamlFilePath);
 
                 // insert using:
-                if (xaml.Attribute("xmlns:res") == null)
+                if (!xaml.Attributes().Any(a => a.Name.LocalName == "res"))
                     // TODO: auto add assembly info, based on res.cs parenting .csproj (file system wise) and xaml parenting csproj -> same csproj no add, different csproj add res.cs csproj name
-                    xaml.SetAttributeValue("xmlns:res", $"clr-namespace:{Manager.Namespace}");
+                    xaml.SetAttributeValue(XName.Get("res", xaml.GetNamespaceOfPrefix("xmlns").ToString()), $"clr-namespace:{Manager.Namespace}");
+
+                // save updated xaml file:
+                // TODO: manually somehow restore the line breaks between xml attributes, see https://stackoverflow.com/questions/24413146/preserving-whitespace-within-xml-elements-between-attributes-when-using-xslcompi
+                using (var writer = XmlWriter.Create(XamlFilePath, new XmlWriterSettings { OmitXmlDeclaration = true, NewLineHandling = NewLineHandling.None }))
+                    xaml.Save(writer);
             }
 
             Editor.ValidateDuplicates();

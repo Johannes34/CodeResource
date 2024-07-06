@@ -41,7 +41,7 @@
             <Rectangle Margin="5" />
 
             <DockPanel Margin="16,0">
-                <TextBlock DockPanel.Dock="Bottom" Text="With this option enabled, the imported attribute values in the xaml are replaced with a binding to the resource class." Margin="4,0,4,4" FontStyle="Italic" Foreground="DimGray" VerticalAlignment="Center" TextWrapping="Wrap" />
+                <TextBlock DockPanel.Dock="Bottom" Text="With this option enabled, the imported attribute values in the xaml are replaced with a binding to the resource class. The original unchanged file can be afterwards found in the Windows recycle bin." Margin="4,0,4,4" FontStyle="Italic" Foreground="DimGray" VerticalAlignment="Center" TextWrapping="Wrap" />
                 <CheckBox Content="Insert resource bindings" IsChecked="{Binding ElementName=root, Path=InsertBindings, Mode=TwoWay}" Margin="4" VerticalAlignment="Center" />
             </DockPanel>
             <Rectangle Margin="10" />
