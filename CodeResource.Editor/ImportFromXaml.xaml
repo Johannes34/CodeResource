@@ -1,0 +1,52 @@
+﻿<UserControl x:Class="CodeResource.Editor.ImportFromXaml"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CodeResource.Editor"
+             mc:Ignorable="d" 
+             FontSize="14"
+             Name="root"
+             d:DesignHeight="650" d:DesignWidth="800">
+    
+    <UserControl.Resources>
+        <local:BoolToVisibilityConverter x:Key="BoolToVis" />
+    </UserControl.Resources>
+
+    <Grid>
+        <StackPanel Orientation="Vertical">
+
+            <TextBlock Text="Import resources from XAML" FontSize="16" Margin="4" VerticalAlignment="Center" />
+            <Rectangle Margin="5" />
+
+            <DockPanel Margin="16,0">
+                <TextBlock DockPanel.Dock="Bottom" Text="The .xaml file from which to import resources." Margin="4,0,4,4" FontStyle="Italic" Foreground="DimGray" VerticalAlignment="Center" TextWrapping="Wrap" />
+                <TextBlock Text="XAML file:" Margin="4" VerticalAlignment="Center" />
+                <TextBox Text="{Binding ElementName=root, Path=XamlFilePath, Mode=TwoWay}" MinWidth="50" Margin="20,4" VerticalAlignment="Center" Padding="1,2" />
+            </DockPanel>
+            <Rectangle Margin="5" />
+
+            <DockPanel Margin="16,0">
+                <TextBlock DockPanel.Dock="Bottom" Text="Specify from which xaml attributes to extract resources." Margin="4,0,4,4" FontStyle="Italic" Foreground="DimGray" VerticalAlignment="Center" TextWrapping="Wrap" />
+                <TextBlock Text="Create resources from attributes:" Margin="4" VerticalAlignment="Center" />
+                <TextBox Text="{Binding ElementName=root, Path=XamlAttributes, Mode=TwoWay}" MinWidth="50" Margin="20,4" VerticalAlignment="Center" Padding="1,2" />
+            </DockPanel>
+            <Rectangle Margin="5" />
+
+            <DockPanel Margin="16,0">
+                <TextBlock DockPanel.Dock="Bottom" Text="Choose the language of the text values in the xaml (resource column to fill)." Margin="4,0,4,4" FontStyle="Italic" Foreground="DimGray" VerticalAlignment="Center" TextWrapping="Wrap" />
+                <TextBlock Text="Import language:" Margin="4" VerticalAlignment="Center" />
+                <TextBox Text="{Binding ElementName=root, Path=ImportLanguage, Mode=TwoWay}" MinWidth="50" Margin="20,4" VerticalAlignment="Center" Padding="1,2" />
+            </DockPanel>
+            <Rectangle Margin="5" />
+
+            <DockPanel Margin="16,0">
+                <TextBlock DockPanel.Dock="Bottom" Text="With this option enabled, the imported attribute values in the xaml are replaced with a binding to the resource class." Margin="4,0,4,4" FontStyle="Italic" Foreground="DimGray" VerticalAlignment="Center" TextWrapping="Wrap" />
+                <CheckBox Content="Insert resource bindings" IsChecked="{Binding ElementName=root, Path=InsertBindings, Mode=TwoWay}" Margin="4" VerticalAlignment="Center" />
+            </DockPanel>
+            <Rectangle Margin="10" />
+
+            <Button Content="Import" Margin="20" Click="Import_Click" />
+        </StackPanel>
+    </Grid>
+</UserControl>

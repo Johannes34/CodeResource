@@ -1,0 +1,40 @@
+﻿<UserControl x:Class="CodeResource.Demo.EditorSettings"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CodeResource.Demo"
+             mc:Ignorable="d" 
+             FontSize="14"
+             Name="root"
+             d:DesignHeight="650" d:DesignWidth="800">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Orientation="Vertical">
+            
+            <TextBlock Text="Auto-Localization:" FontSize="16" Margin="4" VerticalAlignment="Center" />
+            <Rectangle Margin="5" />
+
+            <DockPanel Margin="16,0">
+                <TextBlock DockPanel.Dock="Bottom" Text="With auto localization enabled, missing translations can be auto-generated from the default language. API key required." Margin="4,0,4,4" FontStyle="Italic" Foreground="DimGray" VerticalAlignment="Center" TextWrapping="Wrap" />
+                <CheckBox IsChecked="True" Content="ChatGPT API Key:" Margin="4" VerticalAlignment="Center" />
+                <TextBox Text="{Binding ElementName=root, Path=Manager.DefaultKey, Mode=TwoWay}" MinWidth="50" Margin="20,4" VerticalAlignment="Center" Padding="1,2" />
+                <!-- TODO: TextBox for prompt customization/configuration -->
+            </DockPanel>
+            <Rectangle Margin="10" />
+
+            
+            <TextBlock Text="Conventions:" FontSize="16" Margin="4" VerticalAlignment="Center" />
+            <Rectangle Margin="5" />
+            
+            <CheckBox IsChecked="True" Content="Placeholder Count Pattern" Margin="20,4" />
+            <TextBlock Text="With placeholder count pattern convention enabled, each resource key that contains placeholders like {0} should end with '_1S', indicating the number of placeholders present. A mismatch of the pattern will show an error message in the editor. Enabling this convention can prevent possible runtime exceptions when different languages have a different amount of placeholders." Margin="20,0,20,4" FontStyle="Italic" Foreground="DimGray" VerticalAlignment="Center" TextWrapping="Wrap" />
+            <Rectangle Margin="10" />
+
+            <CheckBox IsChecked="True" Content="Pluralization Placeholder Pattern" Margin="20,4" />
+            <TextBlock Text="With the pluralization placeholder pattern convention enabled, placeholders {0} that are being filled with a numerical value can be configured to fill text depending on the value of the numerical value instead. For example, the placeholder {0:apple;apples} will be filled out with 'apple' if the provided numerical value is 1, otherwise it is filled out with 'apples'." Margin="20,0,20,4" FontStyle="Italic" Foreground="DimGray" VerticalAlignment="Center" TextWrapping="Wrap" />
+            <Rectangle Margin="10" />
+
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

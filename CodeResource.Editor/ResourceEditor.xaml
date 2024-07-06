@@ -1,0 +1,262 @@
+﻿<UserControl x:Class="CodeResource.Editor.ResourceEditor"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CodeResource.Editor"
+             mc:Ignorable="d" 
+             Name="root"
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <local:BoolToVisibilityConverter x:Key="BoolToVis" />
+
+        <Pen x:Key="iconPen" Thickness="1.5" Brush="Black" />
+
+        <DrawingImage x:Key="iconSettings">
+            <DrawingImage.Drawing>
+                <DrawingGroup>
+                    <GeometryDrawing Pen="{StaticResource iconPen}" Geometry="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065z" />
+                    <GeometryDrawing Pen="{StaticResource iconPen}" Geometry="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" />
+                </DrawingGroup>
+            </DrawingImage.Drawing>
+        </DrawingImage>
+
+        <DrawingImage x:Key="iconMagicWand">
+            <DrawingImage.Drawing>
+                <DrawingGroup>
+                    <GeometryDrawing Pen="{StaticResource iconPen}" Geometry="M6 21l15 -15l-3 -3l-15 15l3 3" />
+                    <GeometryDrawing Pen="{StaticResource iconPen}" Geometry="M15 6l3 3" />
+                    <GeometryDrawing Brush="Black" Geometry="M9 3a2 2 0 0 0 2 2a2 2 0 0 0 -2 2a2 2 0 0 0 -2 -2a2 2 0 0 0 2 -2" />
+                    <GeometryDrawing Brush="Black" Geometry="M19 13a2 2 0 0 0 2 2a2 2 0 0 0 -2 2a2 2 0 0 0 -2 -2a2 2 0 0 0 2 -2" />
+                </DrawingGroup>
+            </DrawingImage.Drawing>
+        </DrawingImage>
+
+        <DrawingImage x:Key="iconEmptyBrackets">
+            <DrawingImage.Drawing>
+                <DrawingGroup>
+                    <GeometryDrawing Pen="{StaticResource iconPen}" Geometry="M8 4h-3v16h3" />
+                    <GeometryDrawing Pen="{StaticResource iconPen}" Geometry="M16 4h3v16h-3" />
+                </DrawingGroup>
+            </DrawingImage.Drawing>
+        </DrawingImage>
+
+        <DrawingImage x:Key="iconWarning">
+            <DrawingImage.Drawing>
+                <DrawingGroup>
+                    <GeometryDrawing Pen="{StaticResource iconPen}" Geometry="M12 19v1.5" />
+                    <GeometryDrawing Pen="{StaticResource iconPen}" Geometry="M12 17v-10" />
+                </DrawingGroup>
+            </DrawingImage.Drawing>
+        </DrawingImage>
+        
+        <DrawingImage x:Key="iconFileImport">
+            <DrawingImage.Drawing>
+                <DrawingGroup>
+                    <GeometryDrawing Pen="{StaticResource iconPen}" Geometry="M14 3v4a1 1 0 0 0 1 1h4" />
+                    <GeometryDrawing Pen="{StaticResource iconPen}" Geometry="M11.5 21h-4.5a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v5m-5 6h7m-3 -3l3 3l-3 3" />
+                </DrawingGroup>
+            </DrawingImage.Drawing>
+        </DrawingImage>
+        
+        <DrawingImage x:Key="iconLanguage">
+            <DrawingImage.Drawing>
+                <DrawingGroup>
+                    <GeometryDrawing Pen="{StaticResource iconPen}" Geometry="M4 5h7" />
+                    <GeometryDrawing Pen="{StaticResource iconPen}" Geometry="M9 3v2c0 4.418 -2.239 8 -5 8" />
+                    <GeometryDrawing Pen="{StaticResource iconPen}" Geometry="M5 9c0 2.144 2.952 3.908 6.7 4" />
+                    <GeometryDrawing Pen="{StaticResource iconPen}" Geometry="M12 20l4 -9l4 9" />
+                    <GeometryDrawing Pen="{StaticResource iconPen}" Geometry="M19.1 18h-6.2" />
+                </DrawingGroup>
+            </DrawingImage.Drawing>
+        </DrawingImage>
+
+        <DrawingImage x:Key="iconCopy">
+            <DrawingImage.Drawing>
+                <DrawingGroup>
+                    <GeometryDrawing Pen="{StaticResource iconPen}" Geometry="M7 7m0 2.667a2.667 2.667 0 0 1 2.667 -2.667h8.666a2.667 2.667 0 0 1 2.667 2.667v8.666a2.667 2.667 0 0 1 -2.667 2.667h-8.666a2.667 2.667 0 0 1 -2.667 -2.667z" />
+                    <GeometryDrawing Pen="{StaticResource iconPen}" Geometry="M4.012 16.737a2.005 2.005 0 0 1 -1.012 -1.737v-10c0 -1.1 .9 -2 2 -2h10c.75 0 1.158 .385 1.5 1" />
+                </DrawingGroup>
+            </DrawingImage.Drawing>
+        </DrawingImage>
+
+        <DataTemplate x:Key="dataGridCopyButtonColumnTemplate">
+            <Button Background="Transparent" BorderThickness="0" Click="CopyButton_Click">
+                <Image Margin="2" Width="14" Height="14" Source="{StaticResource iconCopy}" />
+            </Button>
+        </DataTemplate>
+    </UserControl.Resources>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Text="Filter:" FontSize="10" Margin="4,4,0,0" VerticalAlignment="Center" />
+        <DockPanel Grid.Row="1" LastChildFill="False">
+            <TextBox Text="{Binding ElementName=root, Path=FilterString, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" MinWidth="80" Margin="4" VerticalAlignment="Center" Padding="1,2" />
+
+            <ToggleButton ToolTip="Show only entries with missing localization" IsChecked="{Binding ElementName=root, Path=ShowEntriesWithMissingLocalization, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="4" VerticalAlignment="Center">
+                <Image Margin="2" Width="14" Height="14" Source="{StaticResource iconEmptyBrackets}" />
+            </ToggleButton>
+
+            <ToggleButton ToolTip="Show only entries with errors" IsChecked="{Binding ElementName=root, Path=ShowEntriesWithErrors, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="4" VerticalAlignment="Center">
+                <Image Margin="2" Width="14" Height="14" Source="{StaticResource iconWarning}" />
+            </ToggleButton>
+        </DockPanel>
+
+        <TextBlock Grid.Column="2" Grid.ColumnSpan="2" Text="Languages:" FontSize="10" Margin="4,4,0,0" VerticalAlignment="Center" />
+        <DockPanel Grid.Row="1" Grid.Column="2" LastChildFill="False">
+            <Button ToolTip="Add or remove languages..." Margin="4" Click="Languages_Click">
+                <Image Margin="2" Width="14" Height="14" Source="{StaticResource iconLanguage}" />
+            </Button>
+        </DockPanel>
+        
+        <TextBlock Grid.Column="4" Grid.ColumnSpan="2" Text="Add localizations:" FontSize="10" Margin="4,4,0,0" VerticalAlignment="Center" />
+        <DockPanel Grid.Row="1" Grid.Column="4" LastChildFill="False">
+            <Button ToolTip="Auto-Localize using ChatGPT..." Margin="4" Click="AutoLocalize_Click">
+                <Image Margin="2" Width="14" Height="14" Source="{StaticResource iconMagicWand}" />
+            </Button>
+            <Button ToolTip="Create resources from xaml file..." Margin="4" Click="CreateFromXaml_Click">
+                <Image Margin="2" Width="14" Height="14" Source="{StaticResource iconFileImport}" />
+            </Button>
+        </DockPanel>
+
+        <TextBlock Grid.Column="6" Text="Settings:" FontSize="10" Margin="4,4,9,0" VerticalAlignment="Center" />
+        <DockPanel Grid.Row="1" Grid.Column="6" LastChildFill="False">
+            <Button ToolTip="Code Settings" Margin="4" Click="Settings_Click">
+                <Image Margin="2" Width="14" Height="14" Source="{StaticResource iconSettings}" />
+            </Button>
+        </DockPanel>
+
+        <DataGrid x:Name="grid" Grid.Row="2" Grid.ColumnSpan="99" ItemsSource="{Binding ElementName=root, Path=FilteredResourceEntries}" 
+                  AutoGenerateColumns="False" CanUserAddRows="True" CanUserDeleteRows="True" CanUserResizeColumns="True" CanUserResizeRows="True" CanUserReorderColumns="True" 
+                  SelectionMode="Extended" SelectionUnit="CellOrRowHeader" PreviewMouseLeftButtonDown="grid_PreviewMouseLeftButtonDown"  MouseLeftButtonUp="grid_MouseLeftButtonUp" PreviewKeyDown="grid_PreviewKeyDown"
+                  RowHeaderWidth="18" BorderThickness="0" Margin="4" Background="White" FontSize="14" GridLinesVisibility="None">
+            <DataGrid.Resources>
+                <Style TargetType="{x:Type Thumb}" x:Key="ThumbStyle">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Thumb}">
+                                <Rectangle Width="4" Stroke="Transparent" StrokeThickness="4" Cursor="SizeWE"/>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+                <Style TargetType="{x:Type Thumb}" x:Key="RowHeaderThumbStyle">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Thumb}">
+                                <Rectangle Height="4" Stroke="Transparent" StrokeThickness="4" Cursor="SizeNS" />
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </DataGrid.Resources>
+            <DataGrid.ColumnHeaderStyle>
+                <Style TargetType="DataGridColumnHeader">
+                    <Setter Property="Padding" Value="5,2,10,2" />
+                    <Setter Property="FontWeight" Value="Bold" />
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type DataGridColumnHeader}">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    
+                                    <Border x:Name="BackgroundBorder" BorderThickness="0,0,0.5,0.5" Background="White" BorderBrush="LightGray" Grid.ColumnSpan="2"/>
+                                    <ContentPresenter Margin="6,3,6,3" VerticalAlignment="Center"/>
+                                    
+                                    <Path x:Name="SortArrow" Visibility="Collapsed" Data="M 0,0 L 1,0 0.5,1 z" Stretch="Fill" Grid.Column="1" Width="8" Height="6" Fill="Black" Margin="0,0,8,0" VerticalAlignment="Center" RenderTransformOrigin="0.5, 0.4"/>
+                                    <Thumb x:Name="PART_LeftHeaderGripper" HorizontalAlignment="Left" Style="{StaticResource ThumbStyle}"/>
+                                    <Thumb x:Name="PART_RightHeaderGripper" Grid.Column="1" HorizontalAlignment="Right" Style="{StaticResource ThumbStyle}"/>
+                                </Grid>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter TargetName="BackgroundBorder" Property="Background" Value="#F8F8F8"/>
+                                        <Setter TargetName="BackgroundBorder" Property="BorderBrush" Value="Gray"/>
+                                    </Trigger>
+                                    <Trigger Property="SortDirection" Value="Ascending">
+                                        <Setter TargetName="SortArrow" Property="Visibility" Value="Visible"/>
+                                        <Setter TargetName="SortArrow" Property="RenderTransform">
+                                            <Setter.Value>
+                                                <RotateTransform Angle="180"/>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Trigger>
+                                    <Trigger Property="SortDirection" Value="Descending">
+                                        <Setter TargetName="SortArrow" Property="Visibility" Value="Visible"/>
+                                    </Trigger>
+                                    <Trigger Property="DisplayIndex" Value="0">
+                                        <Setter TargetName="PART_LeftHeaderGripper" Property="Visibility" Value="Collapsed"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </DataGrid.ColumnHeaderStyle>
+            <DataGrid.CellStyle>
+                <Style TargetType="DataGridCell">
+                    <Setter Property="Padding" Value="5,2,10,2" />
+                    <Setter Property="BorderThickness" Value="0,0,0.5,0.5" />
+                    <Setter Property="BorderBrush" Value="LightGray" />
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type DataGridCell}">
+                                <Border Padding="{TemplateBinding Padding}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                                    <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </DataGrid.CellStyle>
+            <DataGrid.RowHeaderStyle>
+                <Style TargetType="DataGridRowHeader">
+                    <Setter Property="Background" Value="#F8F8F8" />
+                    <Setter Property="BorderBrush" Value="LightGray" />
+                    <Setter Property="BorderThickness" Value="0.5,0,0.5,0.5" />
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type DataGridRowHeader}">
+                                <Grid>
+                                    <Border x:Name="BackgroundBorder" BorderThickness="0.5" Background="White" BorderBrush="LightGray">
+                                        <Grid>
+                                            <ContentPresenter VerticalAlignment="Center" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                            <TextBlock Foreground="Red" Text="!" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" TextAlignment="Center" 
+                                                        Visibility="{Binding Item.IsErroneous, Converter={StaticResource BoolToVis}, RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}}"
+                                                        ToolTip="{Binding Item.ErrorMessage, RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}}"/>
+                                        </Grid>
+                                    </Border>
+                                    <Thumb x:Name="PART_TopHeaderGripper" Style="{StaticResource RowHeaderThumbStyle}" VerticalAlignment="Top" />
+                                    <Thumb x:Name="PART_BottomHeaderGripper" Style="{StaticResource RowHeaderThumbStyle}" VerticalAlignment="Bottom" />
+                                </Grid>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter TargetName="BackgroundBorder" Property="Background" Value="#F8F8F8"/>
+                                        <Setter TargetName="BackgroundBorder" Property="BorderBrush" Value="Gray"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </DataGrid.RowHeaderStyle>
+        </DataGrid>
+    </Grid>
+</UserControl>

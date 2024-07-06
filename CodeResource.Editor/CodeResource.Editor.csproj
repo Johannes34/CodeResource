@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+	<UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="OpenAI" Version="2.0.0-beta.7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CodeResource\CodeResource.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="CopyResourceView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="ResourceEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,72 @@
+﻿<UserControl x:Class="CodeResource.Editor.CopyResourceView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CodeResource.Editor"
+             mc:Ignorable="d" 
+             FontSize="14"
+             Name="root"
+             d:DesignHeight="650" d:DesignWidth="800">
+    
+    <UserControl.Resources>
+        <local:BoolToVisibilityConverter x:Key="BoolToVis" />
+    </UserControl.Resources>
+    
+    <Grid>
+        <StackPanel Orientation="Vertical">
+            <TextBlock Text="Source code" Margin="3" FontWeight="Bold" />
+            <StackPanel Orientation="Horizontal">
+                <Button Content="⎘" Background="Transparent" BorderThickness="0" Click="Copy_Click" />
+                <TextBox Text="{Binding ElementName=root, Path=CodeUsing, Mode=OneWay}" Margin="6,3" IsReadOnly="True" BorderThickness="0" Background="Transparent" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Button Content="⎘" Background="Transparent" BorderThickness="0" Click="Copy_Click" />
+                <TextBox Text="{Binding ElementName=root, Path=CodeResourceName, Mode=OneWay}" Margin="6,3" IsReadOnly="True" BorderThickness="0" Background="Transparent" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Visibility="{Binding ElementName=root, Path=IsWithSimplePlaceholders, Converter={StaticResource BoolToVis}}" >
+                <Button Content="⎘" Background="Transparent" BorderThickness="0" Click="Copy_Click" />
+                <TextBox Text="{Binding ElementName=root, Path=CodeSimplePlaceholder, Mode=OneWay}" Margin="6,3" IsReadOnly="True" BorderThickness="0" Background="Transparent" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Visibility="{Binding ElementName=root, Path=IsWithPluralizedPlaceholders, Converter={StaticResource BoolToVis}}">
+                <Button Content="⎘" Background="Transparent" BorderThickness="0" Click="Copy_Click" />
+                <TextBox Text="{Binding ElementName=root, Path=CodePluralizedPlaceholder, Mode=OneWay}" Margin="6,3" IsReadOnly="True" BorderThickness="0" Background="Transparent" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Visibility="{Binding ElementName=root, Path=IsWithPluralizedPlaceholders, Converter={StaticResource BoolToVis}}" >
+                <Button Content="⎘" Background="Transparent" BorderThickness="0" Click="Copy_Click" />
+                <TextBox Text="{Binding ElementName=root, Path=CodePluralizedPlaceholder2, Mode=OneWay}" Margin="6,3" IsReadOnly="True" BorderThickness="0" Background="Transparent" />
+            </StackPanel>
+
+
+            <TextBlock Text="XAML code" Margin="3,20,3,3" FontWeight="Bold" />
+            <StackPanel Orientation="Horizontal">
+                <Button Content="⎘" Background="Transparent" BorderThickness="0" Click="Copy_Click" />
+                <TextBox Text="{Binding ElementName=root, Path=XamlUsing, Mode=OneWay}" Margin="6,3" IsReadOnly="True" BorderThickness="0" Background="Transparent" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Visibility="{Binding ElementName=root, Path=IsWithoutPlaceholder, Converter={StaticResource BoolToVis}}" >
+                <Button Content="⎘" Background="Transparent" BorderThickness="0" Click="Copy_Click" />
+                <TextBox Text="{Binding ElementName=root, Path=XamlResourceNameBinding, Mode=OneWay}" Margin="6,3" IsReadOnly="True" BorderThickness="0" Background="Transparent" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Visibility="{Binding ElementName=root, Path=IsWithoutPlaceholder, Converter={StaticResource BoolToVis}}" >
+                <Button Content="⎘" Background="Transparent" BorderThickness="0" Click="Copy_Click" />
+                <TextBox Text="{Binding ElementName=root, Path=XamlResourceNameBindingWithFormatting, Mode=OneWay}" Margin="6,3" IsReadOnly="True" BorderThickness="0" Background="Transparent" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Visibility="{Binding ElementName=root, Path=IsWithOneSimplePlaceholder, Converter={StaticResource BoolToVis}}">
+                <Button Content="⎘" Background="Transparent" BorderThickness="0" Click="Copy_Click" />
+                <TextBox Text="{Binding ElementName=root, Path=XamlSimpleOneSlotPlaceholderBinding, Mode=OneWay}" Margin="6,3" IsReadOnly="True" BorderThickness="0" Background="Transparent" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Visibility="{Binding ElementName=root, Path=IsWithMultipleSimplePlaceholder, Converter={StaticResource BoolToVis}}">
+                <Button Content="⎘" Background="Transparent" BorderThickness="0" Click="Copy_Click" />
+                <TextBox Text="{Binding ElementName=root, Path=XamlSimpleMultiSlotPlaceholderBinding, Mode=OneWay}" Margin="6,3" IsReadOnly="True" BorderThickness="0" Background="Transparent" />
+            </StackPanel>
+
+            
+            <TextBlock Text="Localize Remaining languages AI prompt" Margin="3,20,3,3" FontWeight="Bold" Visibility="{Binding ElementName=root, Path=Resource.HasMissingValues, Converter={StaticResource BoolToVis}}" />
+            <StackPanel Orientation="Horizontal" Visibility="{Binding ElementName=root, Path=Resource.HasMissingValues, Converter={StaticResource BoolToVis}}">
+                <Button Content="⎘" Background="Transparent" BorderThickness="0" Click="Copy_Click" />
+                <TextBox Text="{Binding ElementName=root, Path=LocalizeRemainingAIPrompt, Mode=OneWay}" Margin="6,3" IsReadOnly="True" BorderThickness="0" Background="Transparent" />
+            </StackPanel>
+            
+        </StackPanel>
+    </Grid>
+</UserControl>
