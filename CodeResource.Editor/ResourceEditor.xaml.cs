@@ -88,7 +88,13 @@ namespace CodeResource.Editor
 
             var dataGridCopyButtonColumnTemplate = FindResource("dataGridCopyButtonColumnTemplate") as DataTemplate;
 
-            grid.Columns.Add(new DataGridTextColumn() { Header = "Resource Name", Binding = new Binding(nameof(ResourceEntry.ResourceName)) { Mode = BindingMode.TwoWay, UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged } });
+            grid.Columns.Add(new DataGridTextColumn() { 
+                Header = "Resource Name", 
+                Binding = new Binding(nameof(ResourceEntry.ResourceName)) { Mode = BindingMode.TwoWay, UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged },
+                ElementStyle = multiLineTextBlockStyle,
+                EditingElementStyle = multiLineTextBoxStyle,
+                Width = 250 });
+
             foreach (var key in Manager.DefinedKeys)
             {
                 grid.Columns.Add(new DataGridTextColumn() 
@@ -96,12 +102,29 @@ namespace CodeResource.Editor
                     Header = key, 
                     Binding = new Binding($"{nameof(ResourceEntry.ResourceValues)}[{key}].{nameof(ResourceKeyValue.Value)}") { Mode = BindingMode.TwoWay, UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged },
                     ElementStyle = multiLineTextBlockStyle,
-                    EditingElementStyle = multiLineTextBoxStyle
+                    EditingElementStyle = multiLineTextBoxStyle,
+                    Width = 250
                 });
             }
-            grid.Columns.Add(new DataGridComboBoxColumn() { Header = "Type", ItemsSource = Enum.GetValues<ResourceType>(), SelectedItemBinding = new Binding(nameof(ResourceEntry.Type)) { Mode = BindingMode.TwoWay, UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged } });
-            grid.Columns.Add(new DataGridTextColumn() { Header = "Comment", Binding = new Binding(nameof(ResourceEntry.Comment)) { Mode = BindingMode.TwoWay, UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged } });
-            grid.Columns.Add(new DataGridTemplateColumn() { Header = "Copy", CanUserSort = false, CanUserResize = false, IsReadOnly = true, CellTemplate = dataGridCopyButtonColumnTemplate });
+
+            grid.Columns.Add(new DataGridComboBoxColumn() { 
+                Header = "Type",
+                ItemsSource = Enum.GetValues<ResourceType>(), 
+                SelectedItemBinding = new Binding(nameof(ResourceEntry.Type)) { Mode = BindingMode.TwoWay, UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged } });
+
+            grid.Columns.Add(new DataGridTextColumn() { 
+                Header = "Comment", 
+                Binding = new Binding(nameof(ResourceEntry.Comment)) { Mode = BindingMode.TwoWay, UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged },
+                ElementStyle = multiLineTextBlockStyle,
+                EditingElementStyle = multiLineTextBoxStyle,
+                Width = 200 });
+
+            grid.Columns.Add(new DataGridTemplateColumn() { 
+                Header = "Copy", 
+                CanUserSort = false, 
+                CanUserResize = false, 
+                IsReadOnly = true, 
+                CellTemplate = dataGridCopyButtonColumnTemplate });
 
             grid.RowValidationRules.Add(new ResourceEntryValidationRule(this) { ValidationStep = ValidationStep.UpdatedValue });
             //grid.RowValidationRules.Add(new ResourceEntryValidationRule(Manager) { ValidationStep = ValidationStep.UpdatedValue });
