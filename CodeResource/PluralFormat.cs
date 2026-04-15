@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Data;
 
 namespace CodeResource
 {
@@ -21,10 +23,7 @@ namespace CodeResource
     {
         public static PluralFormatProvider Default { get; } = new PluralFormatProvider();
 
-        public object GetFormat(Type formatType)
-        {
-            return this;
-        }
+        public object GetFormat(Type formatType) => this;
 
         public string Format(string format, object arg, IFormatProvider formatProvider)
         {
@@ -61,6 +60,26 @@ namespace CodeResource
         public static string FormatPlural(this string resourceValueWithPluralPlaceholders, params object[] values)
         {
             return String.Format(new PluralFormatProvider(), resourceValueWithPluralPlaceholders, values);
+        }
+    }
+
+    public class StringFormatConverter : IMultiValueConverter
+    {
+        public static StringFormatConverter Default { get; } = new StringFormatConverter();
+
+        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
+        {
+            var format = values?.FirstOrDefault() as string;
+            if (format != null)
+            {
+                return format.FormatPlural(values.Skip(1).ToArray());
+            }
+            return null;
+        }
+
+        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
         }
     }
 }

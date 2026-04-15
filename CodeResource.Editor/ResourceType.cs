@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CodeResource
+namespace CodeResource.Editor
 {
     public enum ResourceType
     {
